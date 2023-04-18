@@ -1,4 +1,7 @@
-import HelloWorldScene from "./assets/scenes/HelloWorldScene.js";
+import MainMenu from "./assets/scenes/mainMenu.js";
+import GameOver from "./assets/scenes/gameOver.js";
+import Congratulations from "./assets/scenes/Congratulations.js";
+import Game from "./assets/scenes/Game.js";
 
 // Create a new Phaser config object
 const config = {
@@ -21,14 +24,14 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 200 },
-      debug: true,
+      debug: false,
     },
   },
   // List of scenes to load
   // Only the first scene will be shown
   // Remember to import the scene before adding it to the list
-  scene: [HelloWorldScene],
+  scene: [MainMenu, Game, Congratulations, GameOver ],
 };
 
 // Create a new Phaser game instance
-window.game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
