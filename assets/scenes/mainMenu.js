@@ -15,10 +15,11 @@ export default class MainMenu extends Phaser.Scene {
   }
 
   preload() {
-    // load assets
+    this.load.image('fondoMenu', 'assets/images/FondoMenu.jpg');
   }
   create() {
     // create game objects
+    this.add.image(400, 300, 'fondoMenu');
   }
 
   update() {
