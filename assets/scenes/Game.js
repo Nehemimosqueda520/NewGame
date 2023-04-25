@@ -1,4 +1,11 @@
-import { Player_Movements } from "../../utils.js";
+import {
+  Player_Movements,
+  shapeDelay,
+  shapes,
+  TRIANGULE,
+  SQUARE,
+  ROMBO,
+} from "../../utils.js";
 
 export default class Game extends Phaser.Scene {
   constructor() {
@@ -23,9 +30,9 @@ export default class Game extends Phaser.Scene {
     this.load.image("sky", "assets/images/Cielo.png");
     this.load.image("platform", "assets/images/platform.png");
     this.load.image("character", "assets/images/Ninja.png");
-    this.load.image("triangle", "assets/images/Triangulo.png");
-    this.load.image("square", "assets/images/Cuadrado.png");
-    this.load.image("rombo", "assets/images/Rombo.png");
+    this.load.image(TRIANGULE, "assets/images/Triangulo.png");
+    this.load.image(SQUARE, "assets/images/Cuadrado.png");
+    this.load.image(ROMBO, "assets/images/Rombo.png");
   }
 
   create() {
@@ -38,9 +45,9 @@ export default class Game extends Phaser.Scene {
     this.platforms.create(400, 580, "platform").setScale(2).refreshBody();
 
     this.shapes = this.physics.add.group();
-    this.shapes.create(400, 0, "triangle");
-    this.shapes.create(200, 0, "square");
-    this.shapes.create(600, 0, "rombo");
+    this.shapes.create(400, 0, TRIANGULE);
+    this.shapes.create(200, 0, SQUARE);
+    this.shapes.create(600, 0, ROMBO);
 
     this.physics.add.collider(this.character, this.platforms);
 
@@ -57,11 +64,30 @@ export default class Game extends Phaser.Scene {
     );
 
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.time.addEvent({
+      delay: shapeDelay,
+      callback: this.addShape,
+      callbackScope: this,
+      loop: true,
+    });
   }
 
   collectShape(character, shapes) {
     console.log("uwu");
     shapes.disableBody(true, true);
+  }
+
+  addShape() {
+    const randomShape = Phaser.Math.RND.pick(shapes);
+
+    const randomX = Phaser.Math.RND.between(0, 800);
+
+    console.log(randomX, randomShape);
+
+    this.shapes.create(randomX, 0, randomShape);
+
+    console.log("figura", randomX, randomShape);
   }
 
   update() {

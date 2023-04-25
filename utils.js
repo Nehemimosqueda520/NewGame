@@ -3,4 +3,11 @@ const Player_Movements = {
   y: 500,
 };
 
-export { Player_Movements };
+const shapeDelay = 3000;
+
+const TRIANGULE = "triangle";
+const SQUARE = "square";
+const ROMBO = "rombo";
+const shapes = [TRIANGULE, SQUARE, ROMBO];
+
+export { Player_Movements, shapeDelay, shapes, TRIANGULE, SQUARE, ROMBO };
